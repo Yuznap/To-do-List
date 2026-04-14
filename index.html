@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-do App</title>
+
+    <!-- Adding Style Sheet -->
+    <link rel="stylesheet" href="./styles.css" />
+
+    <!-- Adding Icons Library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <main>
+      <div class="title">
+        <h1>Todo List</h1>
+      </div>
+      <div class="app">
+        <!-- Add task Section -->
+        <div class="add-tasks">
+          <!-- Input-task -->
+          <div class="input-task-wrapper">
+            <input
+              id="input-task"
+              type="text"
+              placeholder="Add a new task..."
+            />
+          </div>
+          <div class="add-task-btn-wrapper">
+            <button class="add-task-btn">Add Task</button>
+          </div>
+        </div>
+        <!-- Show Task Section -->
+        <div class="show-tasks add-tasks">
+          <div class="all-wrapper">
+            <button class="all-btn show-tasks-btn add-task-btn">All</button>
+          </div>
+          <div class="active-wrapper">
+            <button class="active-btn show-tasks-btn add-task-btn">
+              Active
+            </button>
+          </div>
+          <div class="completed-wrapper">
+            <button class="completed-btn show-tasks-btn add-task-btn">
+              Completed
+            </button>
+          </div>
+        </div>
+        <!-- Actual Task List Section -->
+        <div class="task-container" id="task-id">
+          <div class="tasks">
+            <div class="task-wrapper">
+              <div class="check-mark"></div>
+              <div class="task-title">Learn JavaScript</div>
+            </div>
+            <div class="task-edit-wrapper">
+              <div class="task-edit fa fa-pencil"></div>
+              <div class="task-delete fa fa-trash"></div>
+            </div>
+          </div>
+        </div>
+        <div class="show-status-container">
+          <div class="show-status">
+            <div class="task-left">
+              <span class="number-of-task">2</span> Tasks left
+            </div>
+            <div class="delete-completed">Clear Completed</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- JavaScript ADDITON  -->
+    <script src="./script.js"></script>
+  </body>
+</html>
