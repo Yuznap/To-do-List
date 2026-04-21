@@ -89,6 +89,12 @@ taskContainer.addEventListener("click", function (e) {
       currentTaskObject.completed = false;
     }
   }
+  // Delete Element Funtionality --> Delete Element From Array
+  if (e.target.classList.contains("task-delete")) {
+    const id = Number(e.target.parentElement.parentElement.getAttribute("id"));
+    tasks.splice(id, 1);
+    showTask(tasks);
+  }
   taskLeft();
 });
 
