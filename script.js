@@ -1,4 +1,16 @@
 "use strict";
+
+// Test Data
+const task1 = {
+  id: 70,
+  task_title: "Learn Java_Script",
+  completed: false,
+};
+const task2 = {
+  id: 70,
+  task_title: "Learn C++",
+  completed: false,
+};
 // Store Task Data
 
 const tasks = [];
@@ -12,41 +24,41 @@ const inputField = document.getElementById("input-task");
 
 // Add Task Html
 taskContainer.innerHTML = "";
-let taskCounter = -1;
-const addTask = function (taskTitle) {
-  let str = `<div class="tasks" id="${taskCounter}">
+
+let taskCounter = 0;
+const showTask = function (tasks) {
+  taskContainer.innerHTML = "";
+  tasks.forEach(function (currentTask) {
+    const completedCheckMark = currentTask.completed ? "task-completed" : "";
+    const completedTitle = currentTask.completed ? "task-completed-line" : "";
+
+    let str = `<div class="tasks" id="${currentTask.id}">
             <div class="task-wrapper">
-              <div class="check-mark"></div>
-              <div class="task-title">${taskTitle}</div>
+              <div class="check-mark ${completedCheckMark}"></div>
+              <div class="task-title ${completedTitle}">${currentTask.task_title}</div>
             </div>
             <div class="task-edit-wrapper">
               <div class="task-edit fa fa-pencil"></div>
               <div class="task-delete fa fa-trash"></div>
             </div>
           </div>`;
-
-  if (taskTitle.trim() !== "") {
-    taskCounter++;
     taskContainer.insertAdjacentHTML("afterbegin", str);
-    tasks.push({ id: taskCounter, task_title: taskTitle, completed: false });
-  }
+  });
 };
 
-addTask("Buy Groceries");
-addTask("Buy Sadde");
-addTask("heelo");
-addTask("Bhai");
-addTask("Kese");
-addTask("ho");
-
 // Funtionality
-
+// showTask(tasks);
 // Add Task Button
 
 addTaskBtn.addEventListener("click", function () {
   const taskTitle = inputField.value;
-  addTask(taskTitle);
+  if (taskTitle.trim() !== "") {
+    tasks.push({ id: taskCounter, task_title: taskTitle, completed: false });
+    showTask(tasks);
+    taskCounter++;
+  }
   inputField.value = "";
+  taskLeft();
 });
 
 // Mark Complted Funtionality
@@ -55,43 +67,79 @@ addTaskBtn.addEventListener("click", function () {
 
 const checkMark = document.querySelectorAll(".check-mark");
 const taskTitle = document.querySelectorAll(".task-title");
-const taskElement = document.querySelector(".tasks");
-
+const taskElement = document.querySelectorAll(".tasks");
 // Task Completed UI
 
-checkMark.forEach(function (curr) {
-  curr.addEventListener("click", function () {
-    curr.classList.toggle("task-completed");
-  });
+taskContainer.addEventListener("click", function (e) {
+  if (e.target.classList.contains("check-mark")) {
+    e.target.classList.toggle("task-completed");
+    e.target.nextElementSibling.classList.toggle("task-completed-line");
+    const currentTaskObject = tasks.find(function (currTask) {
+      return (
+        currTask.id ===
+        Number(e.target.parentElement.parentElement.getAttribute("id"))
+      );
+    });
+    if (
+      e.target.classList.contains("task-completed") &&
+      e.target.nextElementSibling.classList.contains("task-completed-line")
+    ) {
+      currentTaskObject.completed = true;
+    } else {
+      currentTaskObject.completed = false;
+    }
+  }
+  taskLeft();
 });
 
-taskContainer.innerHTML = "";
-const showTasksObj = function (currTaskObject) {
-  let str = `<div class="tasks" id="1">
-            <div class="task-wrapper">
-              <div class="check-mark"></div>
-              <div class="task-title">${currTaskObject.task_title}</div>
-            </div>
-            <div class="task-edit-wrapper">
-              <div class="task-edit fa fa-pencil"></div>
-              <div class="task-delete fa fa-trash"></div>
-            </div>
-          </div>`;
-  taskContainer.insertAdjacentHTML("afterbegin", str);
-};
+// Active Tasks Funtionaluty
 
-tasks.forEach(function (curr) {
-  showTasksObj(curr);
+// Selecting Elements
+
+const activeBtn = document.querySelector(".active-wrapper");
+
+activeBtn.addEventListener("click", function () {
+  const activeTasks = tasks.filter((currTask) => currTask.completed === false);
+  showTask(activeTasks);
+  taskLeft();
 });
 
-// Delete feature
+// Completed Tasks Funtionality
 
-// const taskDelete = document.querySelector(".task-delete");
+const completedBtn = document.querySelector(".completed-wrapper");
 
-// taskDelete.addEventListener("click", function (e) {
-//   console.log("click");
-//   const pearent = e.target.parentElement;
-//   console.log(parent);
-//   const gParent = pearent.parentElement;
-//   console.log(gParent);
-// });
+completedBtn.addEventListener("click", function () {
+  const activeTasks = tasks.filter((currTask) => currTask.completed === true);
+  showTask(activeTasks);
+  taskLeft();
+});
+
+// Alll Task Funtionality
+
+const allBtn = document.querySelector(".all-wrapper");
+
+allBtn.addEventListener("click", function () {
+  showTask(tasks);
+  taskLeft();
+});
+
+// Clear Completed Funtionality
+
+const clearCompleted = document.querySelector(".delete-completed");
+
+clearCompleted.addEventListener("click", function () {
+  const activeTasks = tasks.filter((currTask) => currTask.completed === false);
+  showTask(activeTasks);
+  taskLeft();
+});
+
+// Task Left
+
+function taskLeft() {
+  const activeTasksUpdate = tasks.filter(
+    (currTask) => currTask.completed === false,
+  ).length;
+  document.querySelector(".number-of-task").textContent =
+    `${activeTasksUpdate}`;
+}
+taskLeft();
