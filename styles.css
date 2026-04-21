@@ -164,6 +164,10 @@ h1 {
   opacity: 75%;
   margin-top: 1%;
 }
+.delete-completed,
+.task-left {
+  cursor: pointer;
+}
 
 /* // RESPONSIVE */
 
