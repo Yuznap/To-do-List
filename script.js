@@ -13,7 +13,7 @@ const task2 = {
 };
 // Store Task Data
 
-const tasks = [];
+let tasks = [];
 
 // Selecting Elements
 const taskContainer = document.querySelector(".task-container");
@@ -128,8 +128,8 @@ allBtn.addEventListener("click", function () {
 const clearCompleted = document.querySelector(".delete-completed");
 
 clearCompleted.addEventListener("click", function () {
-  const activeTasks = tasks.filter((currTask) => currTask.completed === false);
-  showTask(activeTasks);
+  tasks = tasks.filter((currTask) => currTask.completed === false);
+  showTask(tasks);
   taskLeft();
 });
 
