@@ -28,11 +28,11 @@ taskContainer.innerHTML = "";
 let taskCounter = 0;
 const showTask = function (tasks) {
   taskContainer.innerHTML = "";
-  tasks.forEach(function (currentTask) {
+  tasks.forEach(function (currentTask, index) {
     const completedCheckMark = currentTask.completed ? "task-completed" : "";
     const completedTitle = currentTask.completed ? "task-completed-line" : "";
 
-    let str = `<div class="tasks" id="${currentTask.id}">
+    let str = `<div class="tasks" id="${(currentTask.id = index)}">
             <div class="task-wrapper">
               <div class="check-mark ${completedCheckMark}"></div>
               <div class="task-title ${completedTitle}">${currentTask.task_title}</div>
@@ -95,6 +95,35 @@ taskContainer.addEventListener("click", function (e) {
     tasks.splice(id, 1);
     showTask(tasks);
   }
+  // Edit Task Feature
+  if (e.target.classList.contains("task-edit")) {
+    // Element For Chaging The FrontEnd (Title Of Task)
+    let taskTitleElement =
+      e.target.parentElement.previousElementSibling.querySelector(
+        ".task-title",
+      );
+    // Creating Input Field
+    let inputFiledCreate = document.createElement("input");
+    inputFiledCreate.classList.add("edit-input");
+    inputFiledCreate.placeholder = "Edit Task ...";
+
+    // For Adding Element When Click Happen On Pencil Icon
+    e.target.parentElement.previousElementSibling.appendChild(inputFiledCreate);
+
+    // Taking Input From Input Field And Update In array
+    e.target.addEventListener("click", () => {
+      const inputValue = document.querySelector(".edit-input").value;
+      const currentElementOfInput = e.target.closest(".tasks");
+      const idOfCurrentTask = Number(currentElementOfInput.getAttribute("id"));
+      tasks.forEach(function (currTask, index) {
+        if (currTask.id === idOfCurrentTask) {
+          currTask.task_title = inputValue;
+        }
+      });
+      showTask(tasks);
+    });
+  }
+
   taskLeft();
 });
 
