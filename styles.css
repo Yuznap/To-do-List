@@ -1,43 +1,59 @@
-/* <!-- adding fonts --> */
+/* Google Font */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-/* Common Things */
-
+/* Reset */
 * {
   box-sizing: border-box;
-  padding: 0%;
-  margin: 0%;
+  padding: 0;
+  margin: 0;
 }
 
-/* Css Start Here */
-
+/* Main Layout */
 main {
   display: flex;
   flex-direction: column;
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background-color: #efe5e5;
+  background:
+    radial-gradient(circle at top left, #dbeafe 0%, transparent 35%),
+    radial-gradient(circle at bottom right, #c7d2fe 0%, transparent 35%),
+    linear-gradient(135deg, #eef2ff, #f8fafc);
 }
 
 h1 {
   font-family: "Poppins", sans-serif;
-  font-weight: 600;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -1.5px;
+  margin-bottom: 1.2rem;
+  position: relative;
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
 }
 
-/* App section start */
+/* App Container */
 .app {
-  background-color: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.95);
   height: 500px;
   width: 500px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 25px 60px rgba(15, 23, 42, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  overflow: hidden;
 }
 
-/* Section 1 */
+/* Add Task Section */
 .add-tasks {
   display: flex;
   justify-content: space-around;
   padding: 1rem;
-  border-bottom: 1px solid rgb(228, 224, 224);
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .input-task-wrapper {
@@ -50,108 +66,169 @@ h1 {
   height: 100%;
   font-size: 1rem;
   padding-left: 1rem;
-  /* border-radius: 10px;
-  border-color: rgb(228, 224, 224); */
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  outline: none;
+  background: #f8fafc;
+  font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
 }
+
+.input-task-wrapper #input-task:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
 .add-task-btn {
   border: none;
-  background-color: rgb(17, 81, 209);
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
   padding: 1rem 1.5rem;
   color: white;
-  border-radius: 3px;
+  border-radius: 10px;
   font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  /* box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25); */
+  transition: all 0.3s ease;
 }
 
-/* Section 2 */
+.add-task-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px rgba(37, 99, 235, 0.35);
+}
 
+/* Filter Buttons */
 .show-tasks {
   justify-content: center;
   gap: 3px;
-  padding: 0.5rem;
+  padding: 0.8rem;
+  border-bottom: 1px solid #e2e8f0;
 }
-/* Task Showing Buttons & hover Effect On It*/
+
 .show-tasks-btn {
   padding: 0.4rem 1.2rem;
-  background-color: rgb(228, 224, 224);
-  color: black;
+  background: #f8fafc;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  transition: all 0.25s ease;
 }
-.show-tasks-btn:hover {
-  background-color: rgb(17, 81, 209);
-  color: white;
-}
-/* Base Condition Button */
-/* .show-tasks .all-wrapper .all-btn {
-  background-color: rgb(17, 81, 209);
-  color: white;
-} */
 
-/* Section 3 -->  Actual Task List Section  */
-.task-container {
-  height: 65%;
-  overflow: scroll;
+.show-tasks-btn:hover {
+  background: #eef2ff;
+  color: #2563eb;
+  border-color: #c7d2fe;
 }
+
+/* Task List */
+.task-container {
+  height: 62%;
+  overflow: scroll;
+  padding-top: 0.5rem;
+}
+
 .task-container::-webkit-scrollbar {
   display: none;
 }
+
+/* Individual Task */
 .tasks {
   display: flex;
   justify-content: space-between;
   margin: 2% 5%;
-  padding: 1rem 1rem;
-  border-radius: 1rem;
-  border: 1px solid transparent;
+  padding: 1rem;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff, #f8fafc);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+  transition: all 0.3s ease;
 }
+
 .tasks:hover {
-  border: 1px solid rgb(228, 224, 224);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+  border-color: #bfdbfe;
 }
+
 .tasks .task-wrapper {
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
-/* ChecK Mark CSS */
+/* Check Circle */
 .tasks .task-wrapper .check-mark {
-  border: 1px solid rgb(228, 224, 224);
+  border: 2px solid #cbd5e1;
   height: 25px;
   width: 25px;
   border-radius: 50%;
   text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* Corect checkmark */
+.tasks .task-wrapper .check-mark:hover {
+  border-color: #22c55e;
+  transform: scale(1.08);
+}
+
+/* Completed Task */
 .task-completed {
-  background-color: rgb(6, 180, 30);
+  background: linear-gradient(135deg, #22c55e, #16a34a);
   color: white;
   font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  box-shadow: 0 6px 14px rgba(34, 197, 94, 0.35);
 }
+
 .task-completed-line {
   text-decoration: line-through;
   opacity: 0.6;
 }
-/* Task Title Css */
 
+/* Task Text */
 .tasks .task-wrapper .task-title {
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
+  color: #1e293b;
 }
 
-/* Task Edit Css */
+/* Edit/Delete Icons */
 .tasks .task-edit-wrapper {
   display: flex;
   gap: 1rem;
-}
-.tasks .task-edit-wrapper .task-edit {
-  color: rgb(228, 224, 224);
-  font-size: 25px;
-}
-.tasks .task-edit-wrapper .task-delete {
-  color: rgb(228, 224, 224);
-  font-size: 25px;
+  align-items: center;
 }
 
-/* Section 4 --> Last Section  */
+.tasks .task-edit-wrapper .task-edit {
+  color: #3b82f6;
+  font-size: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tasks .task-edit-wrapper .task-delete {
+  color: #ef4444;
+  font-size: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tasks .task-edit-wrapper i:hover {
+  transform: scale(1.15);
+}
+
+/* Bottom Status */
 .show-status-container {
-  border-top: 1px solid rgb(228, 224, 224);
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
 }
 
 .show-status {
@@ -159,36 +236,124 @@ h1 {
   justify-content: space-between;
   margin-left: 6%;
   margin-right: 6%;
+  margin-top: 1%;
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
-  opacity: 75%;
-  margin-top: 1%;
+  color: #64748b;
 }
+
 .delete-completed,
 .task-left {
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* // RESPONSIVE */
-
-@media (max-width: 520px) {
-  .app {
-    height: 500px;
-    width: 300px;
-  }
-  .input-task-wrapper {
-    min-width: 100px;
-    min-height: 20px;
-  }
-  .add-task-btn {
-    padding: 0.5rem 0.7rem;
-    font-size: 1rem;
-  }
+.delete-completed:hover {
+  color: #ef4444;
 }
 
-/* Edit The Input Field OF EIDIT TAsk Section */
+.task-left:hover {
+  color: #2563eb;
+}
+
+/* Edit Input */
 .edit-input {
   height: 110%;
   width: 35%;
   align-items: center;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding-left: 0.5rem;
+  outline: none;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+  @media (max-width: 520px) {
+    h1 {
+      margin-bottom: 0.8rem;
+    }
+
+    .app {
+      height: 500px;
+      max-width: 87%;
+      border-radius: 18px;
+    }
+
+    .add-tasks {
+      padding: 0.8rem;
+      gap: 0.5rem;
+    }
+
+    .input-task-wrapper {
+      min-width: 0;
+      flex: 1;
+      min-height: 40px;
+    }
+
+    .input-task-wrapper #input-task {
+      padding-left: 0.8rem;
+    }
+
+    .add-task-btn {
+      padding: 0.8rem 1rem;
+      white-space: nowrap;
+    }
+
+    .show-tasks {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.8rem;
+    }
+
+    .show-tasks-btn {
+      padding: 0.4rem 1rem;
+    }
+
+    .task-container {
+      padding-top: 0.3rem;
+      height: 63%;
+    }
+
+    .tasks {
+      margin: 3% 4%;
+      padding: 0.9rem;
+    }
+
+    .tasks .task-wrapper {
+      gap: 0.8rem;
+      min-width: 0;
+    }
+
+    .tasks .task-wrapper .task-title {
+      word-break: break-word;
+    }
+
+    .tasks .task-edit-wrapper {
+      gap: 0.7rem;
+    }
+
+    .tasks .task-edit-wrapper .task-edit,
+    .tasks .task-edit-wrapper .task-delete {
+      font-size: 22px;
+    }
+
+    .show-status {
+      margin-left: 5%;
+      margin-right: 5%;
+      padding-bottom: 0.8rem;
+      align-items: center;
+    }
+
+    .edit-input {
+      width: 50%;
+    }
+  }
+
+  .show-tasks-btn:hover {
+    transform: translateY(-2px);
+  }
 }
