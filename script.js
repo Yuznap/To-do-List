@@ -56,6 +56,7 @@ addTaskBtn.addEventListener("click", function () {
     tasks.push({ id: taskCounter, task_title: taskTitle, completed: false });
     showTask(tasks);
     taskCounter++;
+    setTheLocalStorage(tasks);
   }
   inputField.value = "";
   taskLeft();
@@ -88,12 +89,14 @@ taskContainer.addEventListener("click", function (e) {
     } else {
       currentTaskObject.completed = false;
     }
+    setTheLocalStorage(tasks);
   }
   // Delete Element Funtionality --> Delete Element From Array
   if (e.target.classList.contains("task-delete")) {
     const id = Number(e.target.parentElement.parentElement.getAttribute("id"));
     tasks.splice(id, 1);
     showTask(tasks);
+    setTheLocalStorage(tasks);
   }
   // Edit Task Feature
   if (e.target.classList.contains("task-edit")) {
@@ -121,6 +124,7 @@ taskContainer.addEventListener("click", function (e) {
         }
       });
       showTask(tasks);
+      setTheLocalStorage(tasks);
     });
   }
 
@@ -162,10 +166,12 @@ allBtn.addEventListener("click", function () {
 
 const clearCompleted = document.querySelector(".delete-completed");
 
-clearCompleted.addEventListener("click", function () {
+clearCompleted.addEventListener("click", function (e) {
+  e.preventDefault();
   tasks = tasks.filter((currTask) => currTask.completed === false);
   showTask(tasks);
   taskLeft();
+  setTheLocalStorage(tasks);
 });
 
 // Task Left
@@ -177,4 +183,18 @@ function taskLeft() {
   document.querySelector(".number-of-task").textContent =
     `${activeTasksUpdate}`;
 }
+
+function setTheLocalStorage(tasks) {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function setLocale() {
+  const data = JSON.parse(localStorage.getItem("tasks"));
+  showTask(data);
+  if (!data) return;
+  tasks = data;
+}
+
+setLocale();
+
 taskLeft();
